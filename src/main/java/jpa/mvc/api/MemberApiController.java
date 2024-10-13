@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import jpa.mvc.domain.Member;
 import jpa.mvc.service.MemberService;
+import jpa.mvc.web.dto.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -48,19 +49,27 @@ public class MemberApiController {
 
   @GetMapping("api/v2/members")
   @ResponseBody //뷰로 안 가고 api로 던짐
-  public List<Member> findMembersV2(){
-    return memberService.findMembers();
+  public Result findMembersV2(){
+    List<Member> members = memberService.findMembers();
+    List<ReadMemberDto> list = members.stream().map(member -> new ReadMemberDto(member.getName()))
+        .toList();
+    return new Result<>(list);
   }
-
-
-
-
-
 
 
   @Data
   @AllArgsConstructor
-  static
+  static class Result<T>{
+    //private Integer count;
+    private T data;
+  }
+
+
+  @Data
+  @AllArgsConstructor
+  static class ReadMemberDto{
+    private String name;
+  }
 
 
   @Data
