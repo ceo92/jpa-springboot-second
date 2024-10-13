@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert ="~{fragments/header :: bootstrap-css}">
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <style>
+
+        .back{
+             background: rgb(255,0,0);
+             background: linear-gradient(120deg, rgba(255,0,0,1) 0%, rgba(255,141,0,1) 17%, rgba(245,255,0,1) 34%,
+             rgba(34,106,42,1) 51%, rgba(4,37,240,1) 68%, rgba(13,27,147,1) 85%, rgba(94,0,255,1) 100%);
+        }
+
+        .text_color{
+               background: rgb(255,0,0);
+               background: linear-gradient(120deg, rgba(255,0,0,1) 0%, rgba(255,141,0,1) 17%, rgba(245,255,0,1) 34%,
+               rgba(34,106,42,1) 51%, rgba(4,37,240,1) 68%, rgba(13,27,147,1) 85%, rgba(94,0,255,1) 100%);
+          background-clip: text;
+        -webkit-background-clip: text;
+          color: transparent;
+          }
+
+    </style>
+</head>
+<body>
+<form th:object="${member}" method="post" th:action>
+    <div>
+        <label for="username" th:text="|이름 : |"></label>
+        <input th:field="*{username}" th:errorclass="back" >
+        <div class="text-color" th:errors="*{username}" th:text="|빈 칸이면 안 됩니다|"></div>
+    </div>
+
+     <div>
+        <label for="city" th:text="|도시 : |"></label>
+        <input th:field="*{city}" th:errorclass="back" >
+        <div class="text-color" th:errors="*{city}" th:text="|빈 칸이면 안 됩니다|"></div>
+    </div>
+
+     <div>
+        <label for="distance" th:text="|거리 : |"></label>
+        <input th:field="*{distance}" th:errorclass="back" >
+        <div class="text-color" th:errors="*{distance}" th:text="|빈 칸이면 안 됩니다|"></div>
+    </div>
+
+     <div>
+        <label for="zipcode" th:text="|우편번호 : |"></label>
+        <input th:field="*{zipcode}" th:errorclass="back" >
+        <div class="text-color" th:errors="*{zipcode}" th:text="|빈 칸이면 안 됩니다|"></div>
+    </div>
+
+    <button th:text="Submit" class="btn btn-primary"></button>
+
+
+
+
+
+</form>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert ="~{fragments/header :: bootstrap-css}">
+    <meta charset="UTF-8">
+    <title>회원목록</title>
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>상품명</th>
+            <th>가격</th>
+            <th>재고수량</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="item : ${items}">
+            <td th:text="${itemStat.index}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.price}"></td>
+            <td th:text="${item.stockQuantity}"></td>
+            <td><button class = "btn btn-primary" type="button" th:text="수정" th:onclick="|location.href='@{/item-list/{id}/edit-form(id=${item.id})}'|"></button></td>
+        </tr>
+    </tbody>
+
+</table>
+</body>
+</html>

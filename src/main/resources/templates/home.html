@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/header :: bootstrap-css}">
+    <meta charset="UTF-8">
+<!--    <link href="/css/bootstrap.min.css" rel="stylesheet">-->
+    <title>Title</title>
+</head>
+<body>
+    <h2 th:text="|HELLO SHOP|"></h2>
+
+    <div>
+        <h4 th:text="|회원 기능|"></h4>
+        <button th:onclick="|location.href='@{/member-form}'|" class="btn btn-primary">회원 가입</button>
+        <button th:onclick="|location.href='@{/member-list}'|" class="btn btn-primary">회원 목록</button>
+    </div>
+    <br>
+
+    <div>
+        <h4 th:text="|상품 기능|"></h4>
+        <button th:onclick="|location.href='@{/item-form}'|" class="btn btn-primary">상품 등록</button>
+        <button th:onclick="|location.href='@{/item-list}'|" class="btn btn-primary">상품 목록</button>
+    </div>
+    <br>
+
+    <div>
+        <h4 th:text="|주문 기능|"></h4>
+        <button th:onclick="|location.href='@{/order-form}'|" class="btn btn-primary">상품 주문</button>
+        <button th:onclick="|location.href='@{/order-list}'|" class="btn btn-primary">주문 내역</button>
+    </div>
+    <br>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert ="~{fragments/header :: bootstrap-css}">
+    <meta charset="UTF-8">
+    <title>상품 등록</title>
+    <style>
+
+        .back{
+             background: rgb(255,0,0);
+             background: linear-gradient(120deg, rgba(255,0,0,1) 0%, rgba(255,141,0,1) 17%, rgba(245,255,0,1) 34%,
+             rgba(34,106,42,1) 51%, rgba(4,37,240,1) 68%, rgba(13,27,147,1) 85%, rgba(94,0,255,1) 100%);
+        }
+
+        .text_color{
+               background: rgb(255,0,0);
+               background: linear-gradient(120deg, rgba(255,0,0,1) 0%, rgba(255,141,0,1) 17%, rgba(245,255,0,1) 34%,
+               rgba(34,106,42,1) 51%, rgba(4,37,240,1) 68%, rgba(13,27,147,1) 85%, rgba(94,0,255,1) 100%);
+          background-clip: text;
+        -webkit-background-clip: text;
+          color: transparent;
+          }
+
+    </style>
+</head>
+<body>
+<form th:object="${item}" method="post" th:action>
+    <div>
+        <label for="name" th:text="|상품명 : |"></label>
+        <input th:field="*{name}" th:errorclass="back" >
+        <div class="text-color" th:errors="*{name}" th:text="|빈 칸이면 안 됩니다|"></div>
+    </div>
+
+    <div>
+        <label for="price" th:text="|가격 : |"></label>
+        <input th:field="*{price}" th:errorclass="back" >
+        <div class="text-color" th:errors="*{price}" th:text="|빈 칸이면 안 됩니다|"></div>
+    </div>
+
+    <div>
+        <label for="stockQuantity" th:text="|수량 : |"></label>
+        <input th:field="*{stockQuantity}" th:errorclass="back" >
+        <div class="text-color" th:errors="*{stockQuantity}" th:text="|빈 칸이면 안 됩니다|"></div>
+    </div>
+
+    <div>
+        <label for="author" th:text="|저자 : |"></label>
+        <input th:field="*{author}" th:errorclass="back" >
+        <div class="text-color" th:errors="*{author}" th:text="|빈 칸이면 안 됩니다|"></div>
+    </div>
+
+    <div>
+        <label for="isbn" th:text="|ISBN : |"></label>
+        <input th:field="*{isbn}" th:errorclass="back" >
+        <div class="text-color" th:errors="*{isbn}" th:text="|빈 칸이면 안 됩니다|"></div>
+    </div>
+
+    <button th:text="Submit" class="btn btn-primary"></button>
+
+
+
+
+
+</form>
+</body>
+</html>

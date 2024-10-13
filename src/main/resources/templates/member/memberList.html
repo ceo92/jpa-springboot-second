@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert ="~{fragments/header :: bootstrap-css}">
+    <meta charset="UTF-8">
+    <title>회원목록</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+                <th>도시</th>
+                <th>거리</th>
+                <th>우편번호</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${memberStat.index}"></td>
+                <td th:text="${member.username}"></td>
+                <td th:text="${member.city}"></td>
+                <td th:text="${member.distance}"></td>
+                <td th:text="${member.zipcode}"></td>
+            </tr>
+        </tbody>
+
+    </table>
+</body>
+</html>
