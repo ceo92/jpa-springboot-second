@@ -1,5 +1,6 @@
 package jpa.mvc.api;
 
+import jakarta.validation.constraints.NotNull;
 import jpa.mvc.domain.Member;
 import jpa.mvc.service.MemberService;
 import lombok.Data;
@@ -30,6 +31,12 @@ public class MemberApiController {
     return new CreateMemberResponse(joinId);
   }
 
+
+  @Data
+  static class CreateMemberRequest{
+    @NotNull
+    private String name;
+  }
 
   @Data
   static class CreateMemberResponse{
