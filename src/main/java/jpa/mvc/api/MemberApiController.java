@@ -53,7 +53,7 @@ public class MemberApiController {
     List<Member> members = memberService.findMembers();
     List<ReadMemberDto> list = members.stream().map(member -> new ReadMemberDto(member.getName()))
         .toList();
-    return new Result<>(list);
+    return new Result<>(list); //리스트가 아닌 필드로 반환
   }
 
 
