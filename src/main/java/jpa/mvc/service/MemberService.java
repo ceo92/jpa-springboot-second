@@ -21,8 +21,8 @@ public class MemberService {
      */
     @Transactional
     public Long join(Member member) {
-        //이름 중복 시 제거 로직
-        validateDuplicateMember(member);
+        //이름 중복 시 예외 로직
+        //validateDuplicateMember(member);
         Long savedId = memberRepository.save(member);
         return savedId;
 

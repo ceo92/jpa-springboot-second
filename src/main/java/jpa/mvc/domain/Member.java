@@ -1,5 +1,6 @@
 package jpa.mvc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jpa.mvc.Address;
@@ -22,6 +23,7 @@ public class Member {
 
     @Embedded
     private Address address;
+
 
     @OneToMany(mappedBy = "member" , fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
