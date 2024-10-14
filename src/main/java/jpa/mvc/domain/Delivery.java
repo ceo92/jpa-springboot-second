@@ -1,5 +1,6 @@
 package jpa.mvc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jpa.mvc.Address;
 import lombok.Getter;

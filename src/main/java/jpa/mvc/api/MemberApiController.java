@@ -42,13 +42,11 @@ public class MemberApiController {
   }
 
   @GetMapping("api/v1/members")
-  @ResponseBody //뷰로 안 가고 api로 던짐
   public List<Member> findMembersV1(){
     return memberService.findMembers();
   }
 
   @GetMapping("api/v2/members")
-  @ResponseBody //뷰로 안 가고 api로 던짐
   public Result findMembersV2(){
     List<Member> members = memberService.findMembers();
     List<ReadMemberDto> list = members.stream().map(member -> new ReadMemberDto(member.getName()))

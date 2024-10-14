@@ -34,7 +34,7 @@ public class OrderRepository {
         OrderStatus orderStatus = orderSearch.getOrderStatus();
 
         //Order와 겹치는 Member 조인
-        //OrderStatus는 Order의 필드이지만 username은 Member의 필드이므로 주문에 대한 회원 조회하려면 Order와 Member을 조인해야됨
+        //OrderStatus는 Order의 필드이지만 username은 Member의 필드이므로 주문에 대한 회원 조회하려면 Order와 Member을 조인해야됨 , JPQL로는 동적 쿼리 작성이 이와 같이 불편 , MyBatis에선 <if> , <foreach>로 해결해줬음 ㅇㅇ
         //1. status와 username이 일치하는 경우
         List<Order> resultList;
         if (StringUtils.hasText(username) && (orderStatus==OrderStatus.ORDER || orderStatus ==OrderStatus.CANCEL) ){

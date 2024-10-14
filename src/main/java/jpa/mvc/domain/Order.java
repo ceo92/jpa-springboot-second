@@ -1,5 +1,6 @@
 package jpa.mvc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "ORDERS")
 @Getter @Setter(AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED) //이렇게 JPA는 PROTECTED일 때 관례적으로 생성자 안 쓰고 정적 팩토리 메서드 쓰는 것을 알 수 있음
 public class Order {
     @Id @GeneratedValue //auto : h2이면 그냥 SEQUENCE 전략 ! sequence 객체로부터 하나씩 만듬 ㅇㅇ
     @Column(name = "ORDER_ID")

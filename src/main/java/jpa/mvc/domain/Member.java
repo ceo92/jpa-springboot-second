@@ -18,7 +18,7 @@ public class Member {
     @Column(name = "MEMBER_ID")
     private Long id;
 
-    //@NotEmpty
+
     private String name;
 
     @Embedded
@@ -26,6 +26,7 @@ public class Member {
 
 
     @OneToMany(mappedBy = "member" , fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 
 
