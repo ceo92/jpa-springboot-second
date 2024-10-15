@@ -5,25 +5,24 @@ import java.util.List;
 import jpa.mvc.Address;
 import jpa.mvc.domain.Order;
 import jpa.mvc.domain.OrderStatus;
+import jpa.mvc.repository.OrderRepository;
 import jpa.mvc.repository.OrderSearch;
 import jpa.mvc.service.OrderService;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
+import org.springframework.boot.autoconfigure.task.TaskExecutionProperties.Simple;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
 public class OrderSimpleApiController {
 
-  private final OrderService orderService;
+  private final OrderRepository orderRepository;
 
   @GetMapping("/api/v1/simple-orders")
   public List<Order> findOrdersV1(){
-    List<Order> orders = orderService.findOrders(new OrderSearch());
+    List<Order> orders = orderRepository.findAll(new OrderSearch());
     for (Order order : orders) {
       order.getMember().getName();
       order.getDelivery().getAddress();
@@ -34,40 +33,49 @@ public class OrderSimpleApiController {
   //원래는 컬렉션 응답하면 확장에 어려우니 넘기면 안 되지만 예제이므로 ㅎㅎ
   @GetMapping("/api/v2/simple-orders")
   public List<SimpleOrderDto> findOrdersV2(){
-    List<SimpleOrderDto> newList = orderService.findOrders(new OrderSearch()).stream().map(SimpleOrderDto::new).toList();
+    List<SimpleOrderDto> newList = orderRepository.findAll(new OrderSearch())
+        .stream().map(SimpleOrderDto::new).toList();
     return newList;
   }
 
-
   @GetMapping("/api/v3/simple-orders")
+  public List<SimpleOrderDto> findOrdersV3(){
+    return orderRepository.findAllWithMemberDelivery().stream().map(SimpleOrderDto::new).toList(); //미리 한 쿼리로 가져와서 뿌리는 것 즉 1 + N이 아닌 1번의 쿼리로 나감
+  }
+
+  //order1 => member1 => delivery
+
+
+ /* @GetMapping("/api/v3/simple-orders")
   public Result findOrdersV3(){
     List<SimpleOrderDto> newList = orderService.findOrders(new OrderSearch()).stream().map(SimpleOrderDto::new).toList();
     return new Result<>(newList); //이렇게 제네릭을 통해 일반적인 중괄호로 묶여진 JSON형태가 되게 해야됨 그래야 확장 가능 ㅇㅇ 추가적인 속성이 생겨도 !
   }
 
-
+  // 주문 => 회원 => 배송
   @Data
   @AllArgsConstructor
   static class Result<T>{
     private T data;
-  }
+  }*/
 
   @Data
   static class SimpleOrderDto{
+    //API 스펙에 맞춰서 딱딱 이름들이 잘 반환됨
     private Long orderId;
     private String name;
     private LocalDateTime orderDate;
     private OrderStatus orderStatus;
     private Address address;
 
-    public SimpleOrderDto(Order o){
+    public SimpleOrderDto(Order o){ //order1 , order1 => member , order1 => delivery , order2  , order2 => delivery 나감 ,
+      //order3 , order3 => member , order3 => delivery , order4 , order4=>delivery
       orderId = o.getId();
-      name = o.getMember().getName();
+      name = o.getMember().getName(); //지연로딩이니 일단 프록시 가짜 객체(reference)가 할당됐다가 호출 시점에 영속성 컨텍스트에서 쿼리가 나가며 초기화
       orderDate = o.getOrderDate();
       orderStatus = o.getOrderStatus();
-      address = o.getMember().getAddress();
+      address = o.getDelivery().getAddress();
     }
-
   }
 
 }

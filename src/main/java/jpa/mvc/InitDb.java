@@ -32,8 +32,10 @@ public class InitDb {
   static class InitDbService{
     private final EntityManager em;
 
+
+    //한 회원이 두 상품
     public void dbInit1(){
-      //한 회원이 JPA BOOK1,2를 주문했음 ㅇㅇ
+      //한 회원이 JPA BOOK1,2를 각각 주문했음 ㅇㅇ ,즉 한 주문에 한 상품만 담김
       Member member = new Member();
       member.setName("memberA");
       member.setAddress(new Address("cityA" , "distanceA" , "zipCodeA"));
