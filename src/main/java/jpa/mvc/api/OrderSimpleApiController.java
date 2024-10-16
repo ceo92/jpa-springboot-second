@@ -7,6 +7,7 @@ import jpa.mvc.domain.Order;
 import jpa.mvc.domain.OrderStatus;
 import jpa.mvc.repository.OrderRepository;
 import jpa.mvc.repository.OrderSearch;
+import jpa.mvc.repository.OrderSimpleQueryDto;
 import jpa.mvc.service.OrderService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -40,24 +41,16 @@ public class OrderSimpleApiController {
 
   @GetMapping("/api/v3/simple-orders")
   public List<SimpleOrderDto> findOrdersV3(){
-    return orderRepository.findAllWithMemberDelivery().stream().map(SimpleOrderDto::new).toList(); //미리 한 쿼리로 가져와서 뿌리는 것 즉 1 + N이 아닌 1번의 쿼리로 나감
+    return orderRepository.findAllWithMemberDelivery()
+        .stream().map(SimpleOrderDto::new).toList(); //미리 한 쿼리로 가져와서 뿌리는 것 즉 1 + N이 아닌 1번의 쿼리로 나감
   }
 
-  //order1 => member1 => delivery
-
-
- /* @GetMapping("/api/v3/simple-orders")
-  public Result findOrdersV3(){
-    List<SimpleOrderDto> newList = orderService.findOrders(new OrderSearch()).stream().map(SimpleOrderDto::new).toList();
-    return new Result<>(newList); //이렇게 제네릭을 통해 일반적인 중괄호로 묶여진 JSON형태가 되게 해야됨 그래야 확장 가능 ㅇㅇ 추가적인 속성이 생겨도 !
+  @GetMapping("/api/v4/simple-orders")
+  public List<OrderSimpleQueryDto> ordersV4(){
+    return orderRepository.findOrderDtos();
   }
 
-  // 주문 => 회원 => 배송
-  @Data
-  @AllArgsConstructor
-  static class Result<T>{
-    private T data;
-  }*/
+
 
   @Data
   static class SimpleOrderDto{

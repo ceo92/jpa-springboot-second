@@ -27,7 +27,7 @@ public class InitDb {
   }
 
   @Component
-  @Transactional
+  @Transactional //영속성 컨텍스트 시작 위함
   @RequiredArgsConstructor
   static class InitDbService{
     private final EntityManager em;
