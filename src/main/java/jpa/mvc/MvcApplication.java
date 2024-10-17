@@ -16,9 +16,9 @@ public class MvcApplication {
 	}
 
 
-	/*@Bean
+	@Bean
 	Hibernate5JakartaModule hibernate5JakartaModule(){
 		return new Hibernate5JakartaModule();
-	}*/
+	}
 
 }

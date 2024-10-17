@@ -31,8 +31,8 @@ public class InitDb {
   @RequiredArgsConstructor
   static class InitDbService{
     private final EntityManager em;
-
-
+    //a 회원은 a,b 상품을 각각 주문하였음
+    //b 회원은 c,d 상품을 각각 주문하였음
     //한 회원이 두 상품
     public void dbInit1(){
       //한 회원이 JPA BOOK1,2를 각각 주문했음 ㅇㅇ ,즉 한 주문에 한 상품만 담김

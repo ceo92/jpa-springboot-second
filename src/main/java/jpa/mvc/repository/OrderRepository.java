@@ -65,11 +65,8 @@ public class OrderRepository {
     }
 
 
-    public List<OrderSimpleQueryDto> findOrderDtos() {
-        return em.createQuery("select new jpa.mvc.repository.OrderSimpleQueryDto(o.id , m.name , o.orderDate ,"
-            + " o.orderStatus , d.address)"
-            + "from Order o "
-            + "join o.member m "
-            + "join o.delivery d" , OrderSimpleQueryDto.class).getResultList();
+    //alias X , 페이징 X ,
+    public List<Order> findAllWithOrderItems() {
+        return em.createQuery("select o from Order o join fetch o.member join fetch o.delivery join fetch o.orderItems " , Order.class).getResultList();
     }
 }
