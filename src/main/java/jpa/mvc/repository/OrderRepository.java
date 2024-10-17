@@ -67,6 +67,10 @@ public class OrderRepository {
 
     //alias X , 페이징 X ,
     public List<Order> findAllWithOrderItems() {
-        return em.createQuery("select o from Order o join fetch o.member join fetch o.delivery join fetch o.orderItems " , Order.class).getResultList();
+        return em.createQuery("select o from Order o "
+                                        + "join fetch o.member "
+                                        + "join fetch o.delivery "
+                                        + "join fetch o.orderItems oi "
+                                        + "join fetch oi.item i" , Order.class).getResultList();
     }
 }
