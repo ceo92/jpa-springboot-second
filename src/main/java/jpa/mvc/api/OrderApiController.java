@@ -7,6 +7,7 @@ import jpa.mvc.Address;
 import jpa.mvc.domain.Order;
 import jpa.mvc.domain.OrderItem;
 import jpa.mvc.domain.OrderStatus;
+import jpa.mvc.repository.OrderQueryDto;
 import jpa.mvc.repository.OrderRepository;
 import jpa.mvc.repository.OrderSearch;
 import lombok.Data;
@@ -44,6 +45,12 @@ public class OrderApiController {
     List<Order> orderList = orderRepository.findAllWithOrderItems();
     List<OrderDto> list = orderList.stream().map(OrderDto::new).toList();
     return list;
+  }
+
+
+  @GetMapping("/api/v4/orders")
+  public List<OrderQueryDto> ordersV4(){
+
   }
 
 
