@@ -10,6 +10,7 @@ import jpa.mvc.domain.OrderStatus;
 import jpa.mvc.repository.OrderQueryDto;
 import jpa.mvc.repository.OrderRepository;
 import jpa.mvc.repository.OrderSearch;
+import jpa.mvc.repository.order.query.OrderQueryRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cglib.core.Local;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderApiController {
 
   private final OrderRepository orderRepository;
+  private final OrderQueryRepository orderQueryRepository;
 
   @GetMapping("/api/v1/orders")
   public List<Order> ordersV1(){
@@ -47,12 +49,11 @@ public class OrderApiController {
     return list;
   }
 
-
   @GetMapping("/api/v4/orders")
   public List<OrderQueryDto> ordersV4(){
-
+    List<OrderQueryDto> orderList = orderQueryRepository.findOrderQueryDtoWithOrderItems();
+    return orderList;
   }
-
 
 
 
