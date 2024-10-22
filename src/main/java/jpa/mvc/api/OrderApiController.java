@@ -1,6 +1,7 @@
 package jpa.mvc.api;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import jpa.mvc.Address;
@@ -12,6 +13,7 @@ import jpa.mvc.repository.OrderRepository;
 import jpa.mvc.repository.OrderSearch;
 import jpa.mvc.repository.order.query.OrderQueryRepository;
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
@@ -57,38 +59,43 @@ public class OrderApiController {
 
 
 
-
-  @Data
+  @Getter
   static class OrderDto{
     private Long orderId;
     private String name;
     private LocalDateTime orderDate;
     private OrderStatus orderStatus;
     private Address address;
-    private List<OrderItemDto> orderItems;
+    private List<OrderItem> orderItems;
 
-    public OrderDto(Order order) {
-      this.orderId = order.getId();
-      this.name = order.getMember().getName(); //사람이름
-      this.orderDate = order.getOrderDate();
-      this.orderStatus = order.getOrderStatus();
-      this.address = order.getDelivery().getAddress();
-      this.orderItems = order.getOrderItems().stream().map(OrderItemDto::new).toList();
+    public OrderDto(Order o){
+      this.orderId = o.getId();
+      this.name = o.getMember().getName();
+      this.orderDate = o.getOrderDate();
+      this.orderStatus = o.getOrderStatus();
+      this.address = o.getDelivery().getAddress();
+      o.getOrderItems().stream()
+          .forEach(orderItem -> System.out.println(orderItem.getOrderPrice())); //지연로딩이므로 엔티티는 초기화해야 할당 가능
+      this.orderItems = o.getOrderItems();
     }
   }
 
-  @Data
+  @Getter
   static class OrderItemDto{
+
     private String itemName;
     private int orderPrice;
     private int count;
 
-    public OrderItemDto(OrderItem orderItem) {
+    // 필요한 데이터들만 삽입
+    public OrderItemDto(OrderItem orderItem){
       this.itemName = orderItem.getItem().getName();
       this.orderPrice = orderItem.getOrderPrice();
       this.count = orderItem.getCount();
     }
+
   }
 
-
 }
+
+
