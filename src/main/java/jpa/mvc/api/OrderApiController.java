@@ -44,6 +44,7 @@ public class OrderApiController {
     List<OrderDto> list = orderList.stream().map(OrderDto::new).toList();
     return list;
   }
+
   @GetMapping("/api/v3/orders")
   public List<OrderDto> ordersV3(){
     List<Order> orderList = orderRepository.findAllWithOrderItems();
@@ -66,7 +67,7 @@ public class OrderApiController {
     private LocalDateTime orderDate;
     private OrderStatus orderStatus;
     private Address address;
-    private List<OrderItem> orderItems;
+    private List<OrderItemDto> orderItems;
 
     public OrderDto(Order o){
       this.orderId = o.getId();
@@ -74,9 +75,7 @@ public class OrderApiController {
       this.orderDate = o.getOrderDate();
       this.orderStatus = o.getOrderStatus();
       this.address = o.getDelivery().getAddress();
-      o.getOrderItems().stream()
-          .forEach(orderItem -> System.out.println(orderItem.getOrderPrice())); //지연로딩이므로 엔티티는 초기화해야 할당 가능
-      this.orderItems = o.getOrderItems();
+      this.orderItems = o.getOrderItems().stream().map(OrderItemDto::new).toList();
     }
   }
 
