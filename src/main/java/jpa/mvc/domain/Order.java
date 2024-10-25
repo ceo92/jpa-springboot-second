@@ -21,7 +21,7 @@ public class Order {
 
     @Enumerated(value = EnumType.STRING)
     private OrderStatus orderStatus;
-
+    //기술 스택 =>
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
@@ -29,9 +29,10 @@ public class Order {
     @OneToMany(fetch = FetchType.LAZY , mappedBy = "order" , cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
+
 
     /**
      * 연관관계 편의 메서드 , 한 메서드로 연관관계 설정해버리면 좋음 , 애초에 setter 안 쓰니 이렇게 도메인 내부에서 연관관계 메서드를 쓰는 것 이거 자체가 도메인 주도 설계네

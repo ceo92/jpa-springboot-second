@@ -10,6 +10,8 @@ import org.aspectj.weaver.ast.Or;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.SessionFactory;
+import org.springframework.data.jpa.repository.Query;
 
 @Entity
 @Getter @Setter
@@ -43,7 +45,8 @@ public abstract class Item {
 
     private int stockQuantity;
 
-    @ManyToMany(mappedBy = "items")
+
+    @OneToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 
     /**
@@ -52,7 +55,6 @@ public abstract class Item {
     public void addStock(int stockQuantity){
         this.stockQuantity += stockQuantity;
     }
-
     /**
      * 상품 재고 감소 비즈니스 로직(편의 메서드)
      */

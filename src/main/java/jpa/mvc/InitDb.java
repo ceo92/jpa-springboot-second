@@ -34,6 +34,7 @@ public class InitDb {
     //a 회원은 a,b 상품을 각각 주문하였음
     //b 회원은 c,d 상품을 각각 주문하였음
     //한 회원이 두 상품
+
     public void dbInit1(){
       //한 회원이 JPA BOOK1,2를 각각 주문했음 ㅇㅇ ,즉 한 주문에 한 상품만 담김
       Member member = new Member();
@@ -56,7 +57,7 @@ public class InitDb {
       OrderItem orderItem1 = OrderItem.createOrderItem(book1, 120000, 4);
       OrderItem orderItem2 = OrderItem.createOrderItem(book2, 150000, 5);
 
-      Delivery delivery1 = new Delivery();
+      Delivery delivery1 = new Delivery(); //한 회원이 두 아이템을 각각 배송하려고 함
       delivery1.setAddress(member.getAddress());
       Delivery delivery2 = new Delivery();
       delivery2.setAddress(member.getAddress());

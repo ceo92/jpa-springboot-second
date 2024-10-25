@@ -59,21 +59,23 @@ public class OrderRepository {
         }
         return resultList;
     }
-
-
-
-    //alias X , 페이징 X ,
-    public List<Order> findAllWithOrderItems() {
-        return em.createQuery("select o from Order o "
-                                        + "join fetch o.member "
-                                        + "join fetch o.delivery "
-                                        + "join fetch o.orderItems oi "
-                                        + "join fetch oi.item i" , Order.class).getResultList();
+    public List<Order> findAllWithMemberDelivery(){
+        return em.createQuery("select o from Order o join fetch o.member join fetch o.delivery" , Order.class).getResultList();
     }
 
+    public List<Order> findAllWithPaging(int offset, int limit){
+        return em.createQuery("select o from Order o join fetch o.member join fetch o.delivery d" , Order.class)
+            .setFirstResult(offset)
+            .setMaxResults(limit)
+            .getResultList();
+    }
 
-
-
-
-
+    public List<Order> findAllWithOrderItems() { //자동으로 distinct 옵션이 적용됐음
+        return em.createQuery("select distinct o from Order o "
+            + "join fetch o.member m "
+            + "join fetch o.delivery d "
+            + "join fetch o.orderItems oi "
+            + "join fetch oi.item i ", Order.class)
+            .getResultList();
+    }
 }

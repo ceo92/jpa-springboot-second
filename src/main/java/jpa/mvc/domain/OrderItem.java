@@ -2,6 +2,8 @@ package jpa.mvc.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.*;
 import org.aspectj.weaver.ast.Or;
 
@@ -23,6 +25,7 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ITEM_ID")
     private Item item;
+
 
     private int orderPrice;
 
