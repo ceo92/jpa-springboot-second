@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jpa.mvc.domain.Order;
 import jpa.mvc.domain.OrderStatus;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
