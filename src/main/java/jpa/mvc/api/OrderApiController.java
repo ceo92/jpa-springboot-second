@@ -61,14 +61,12 @@ public class OrderApiController {
    * 페이징 처리 : ToOne 관계는 일단 페치조인
    */
   @GetMapping("/api/v3.1/orders")
-  public List<OrderDto> ordersV3_page(@RequestParam("offset") int offset , @RequestParam("limit") int limit) {
-    List<Order> orderList = orderRepository.findAllWithPaging(offset , limit); //이렇게 하면 @ToOne 즉 회원 , 배송은 페치조인으로 조회하고 OrderItem은 지연로딩
+  public List<OrderDto> ordersV3_page(@RequestParam(value = "offset" , defaultValue = "0") int offset ,
+                                      @RequestParam(value = "limit" , defaultValue = "100") int limit) {
+    List<Order> orderList = orderRepository.findAllWithMemberDelivery(offset , limit); //이렇게 하면 @ToOne 즉 회원 , 배송은 페치조인으로 조회하고 OrderItem은 지연로딩
     List<OrderDto> list = orderList.stream().map(OrderDto::new).toList();
     return list;
   }
-
-
-
 
 
 

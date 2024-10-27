@@ -27,6 +27,7 @@ public class Order {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
+    //@BatchSize(size = 5) 1:N 관계에선 이렇게 각각 @BatchSize를 필드에 지정 가능
     @OneToMany(fetch = FetchType.LAZY , mappedBy = "order" , cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
