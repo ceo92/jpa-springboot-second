@@ -35,7 +35,7 @@ public class InitDb {
   public void init(){
     initDbService.dbInit1();
     initDbService.dbInit2();
-    initDbService.dbInit3();
+    //initDbService.dbInit3();
 
   }
 
@@ -113,7 +113,7 @@ public class InitDb {
 
 
 
-    public void dbInit3(){
+    /*public void dbInit3(){
       //한 회원이 JPA BOOK1,2를 주문했음 ㅇㅇ
       Member member = new Member();
       member.setName("memberC");
@@ -153,7 +153,7 @@ public class InitDb {
       em.persist(order);//OrderItem , Delivery 전부 cascade 걸려있으니 연계적으로 Crud 될 것임
     }
 
-
+*/
 
 
 
