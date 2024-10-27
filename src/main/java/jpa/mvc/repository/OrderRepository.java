@@ -64,15 +64,16 @@ public class OrderRepository {
         return em.createQuery("select o from Order o join fetch o.member join fetch o.delivery" , Order.class).getResultList();
     }
 
+    //delivery랑 member은 페치조인으로 가져오고 orderitem은 지연로딩만
     public List<Order> findAllWithPaging(int offset, int limit){
         return em.createQuery("select o from Order o join fetch o.member join fetch o.delivery d" , Order.class)
-            .setFirstResult(offset)
+            .setFirstResult(offset) //JPA가 알아서 페이징을 해주네;; 아마 LIMIT 문법인듯
             .setMaxResults(limit)
             .getResultList();
     }
 
     public List<Order> findAllWithOrderItems() { //자동으로 distinct 옵션이 적용됐음
-        return em.createQuery("select distinct o from Order o "
+        return em.createQuery("select o from Order o "
             + "join fetch o.member m "
             + "join fetch o.delivery d "
             + "join fetch o.orderItems oi "
