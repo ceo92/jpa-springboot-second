@@ -35,6 +35,7 @@ public class InitDb {
   public void init(){
     initDbService.dbInit1();
     initDbService.dbInit2();
+    initDbService.dbInit3();
 
   }
 
@@ -109,6 +110,50 @@ public class InitDb {
       Order order = Order.createOrder(delivery, member, orderItem1 , orderItem2);
       em.persist(order);//OrderItem , Delivery 전부 cascade 걸려있으니 연계적으로 Crud 될 것임
     }
+
+
+
+    public void dbInit3(){
+      //한 회원이 JPA BOOK1,2를 주문했음 ㅇㅇ
+      Member member = new Member();
+      member.setName("memberC");
+      member.setAddress(new Address("cityC" , "distanceC" , "zipCodeC"));
+      em.persist(member);
+
+      Book book1 = new Book();
+      book1.setName("KAFKA BOOK 1");
+      book1.setPrice(30000);
+      book1.setStockQuantity(60);
+      em.persist(book1);//x 회원이 A아이템을 A1 주문하고 , B 아이템을 B1 주문함 , y회원이 C아이템을 C1 주문하고, D아이템을 D1 주문함
+
+      Book book2 = new Book();
+      book2.setName("KAFKA BOOK 2");
+      book2.setPrice(75000);
+      book2.setStockQuantity(100);
+      em.persist(book2);
+
+      Book book3 = new Book();
+      book3.setName("KAFKA BOOK 3");
+      book3.setPrice(90000);
+      book3.setStockQuantity(90);
+      em.persist(book3);
+
+
+
+
+      OrderItem orderItem1 = OrderItem.createOrderItem(book1, 240000, 8);
+      OrderItem orderItem2 = OrderItem.createOrderItem(book2, 450000, 6);
+      OrderItem orderItem3 = OrderItem.createOrderItem(book3, 900000, 10);
+
+      Delivery delivery = new Delivery();
+      delivery.setAddress(member.getAddress());
+
+
+      Order order = Order.createOrder(delivery, member, orderItem1 , orderItem2 , orderItem3);
+      em.persist(order);//OrderItem , Delivery 전부 cascade 걸려있으니 연계적으로 Crud 될 것임
+    }
+
+
 
 
 
