@@ -1,9 +1,7 @@
 package jpa.mvc.api;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import jpa.mvc.Address;
 import jpa.mvc.domain.Order;
 import jpa.mvc.domain.OrderItem;
@@ -12,15 +10,10 @@ import jpa.mvc.repository.OrderQueryDto;
 import jpa.mvc.repository.OrderRepository;
 import jpa.mvc.repository.OrderSearch;
 import jpa.mvc.repository.order.query.OrderQueryRepository;
-import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.BatchSize;
-import org.springframework.cglib.core.Local;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -67,6 +60,19 @@ public class OrderApiController {
     List<OrderDto> list = orderList.stream().map(OrderDto::new).toList();
     return list;
   }
+
+
+  @GetMapping("/api/v4/orders")
+  public List<OrderQueryDto> ordersV4(){
+    return orderQueryRepository.findOrderQueryDtos(); //쿼리용 리포지토리 팠음
+  }
+
+
+
+
+
+
+
 
 
 
