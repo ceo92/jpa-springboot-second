@@ -62,10 +62,10 @@ public class OrderApiController {
   }
 
 
-  @GetMapping("/api/v4/orders")
+  /*@GetMapping("/api/v4/orders")
   public List<OrderQueryDto> ordersV4(){
     return orderQueryRepository.findOrderQueryDtos(); //쿼리용 리포지토리 팠음
-  }
+  }*/
 
 
 
