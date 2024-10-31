@@ -18,8 +18,6 @@ public class OrderQueryRepository {
   //dto에는 연관관계를 정의하면 안 되고 연관관계에서 필요한 데이터들을 정의
 
 
-  @EntityGraph
-
   private List<OrderQueryDto> findOrders() {
     return em.createQuery(
         "select new jpa.mvc.repository.OrderQueryDto(o.id , m.name , o.orderDate ,"
@@ -28,6 +26,9 @@ public class OrderQueryRepository {
             + "join o.member m "
             + "join o.delivery d", OrderQueryDto.class).getResultList();
   }
+
+
+
 
 
 
