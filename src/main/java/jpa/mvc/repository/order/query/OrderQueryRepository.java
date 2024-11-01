@@ -3,10 +3,8 @@ package jpa.mvc.repository.order.query;
 
 import jakarta.persistence.EntityManager;
 import java.util.List;
-import jpa.mvc.repository.OrderItemQueryDto;
 import jpa.mvc.repository.OrderQueryDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Repository;
 
 @Repository

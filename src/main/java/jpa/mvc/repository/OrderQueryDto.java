@@ -14,7 +14,6 @@ public class OrderQueryDto {
   private LocalDateTime orderDate;
   private OrderStatus orderStatus;
   private Address address;
-  private List<OrderItemQueryDto> orderItems;
 
   public OrderQueryDto(Order order) {
     this.orderId = order.getId();
@@ -22,6 +21,5 @@ public class OrderQueryDto {
     this.orderDate = order.getOrderDate();
     this.orderStatus = order.getOrderStatus();
     this.address = order.getDelivery().getAddress();
-    this.orderItems = order.getOrderItems().stream().map(OrderItemQueryDto::new).toList();
   }
 }
